@@ -1,14 +1,23 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+# export PS1="\u@\w"
+
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/tmp/.oh-my-zsh
+export ZSH=/Users/khataev/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-# ZSH_THEME="robbyrussell"
+#ZSH_THEME="robbyrussell"
 ZSH_THEME="honukai"
+
+# Set list of themes to load
+# Setting this variable when ZSH_THEME=random
+# cause zsh load theme from this variable instead of
+# looking in ~/.oh-my-zsh/themes/
+# An empty array have no effect
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -52,7 +61,10 @@ ZSH_THEME="honukai"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(
+  git
+  zsh-autosuggestions
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -84,27 +96,40 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-# alias cpi9="ssh -t pi@192.168.0.$1 'cd /var/www/eq_unicredit/current && exec bash -l'"
-alias be="bundle exec"
-alias rkrt="rake routes"
-alias rkrtg="rake routes | grep "
-alias rakereset="rake db:migrate:reset && rake db:seed"
-alias rakeresettest="RAILS_ENV=test rake db:migrate:reset"
+#alias be="bundle exec"
+alias rkrt="bundle exec rake routes"
+alias rkrtg="bundle exec rake routes | grep "
+#alias rakereset="rake db:migrate:reset && rake db:seed"
+#alias rakeresettest="RAILS_ENV=test rake db:migrate:reset"
 alias dcu="docker-compose up"
 alias dcd="docker-compose down"
 
-cpi() {
-  ssh -t pi@192.168.0.$1 'cd /var/www/eq_unicredit/current && exec bash -l'
+cprod() {
+  ssh -t ubuntu@10.60.0.32 'cd /mortgage/production-thesaurus && exec bash -l'
 }
 
-cpie() {
-  ssh -t pi@94.228.252.115 -p220$1 'cd /var/www/eq_unicredit/current && exec bash -l'
+cstage() {
+  ssh -t ubuntu@10.30.1.22 'cd /mortgage/staging-thesaurus && exec bash -l'
 }
 
-ccloud() {
-  ssh -t root@185.98.86.210
+ctesting() {
+  ssh -t ubuntu@api-ipoteka-testing.project30.pro 'cd /mortgage/testing-thesaurus && exec bash -l'
 }
 
-export RSPEC_RETRY_RETRY_COUNT=1
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+ctesting-inb() {
+  ssh -t ubuntu@inbox-testing.project30.pro 'cd /mortgage/testing-inbox && exec bash -l'
+}
+
+ctemp() {
+  ssh -t ubuntu@10.28.0.18 'cd /mortgage/temp-thesaurus && exec bash -l'
+}
+
+ctemp-inb() {
+  ssh -t ubuntu@10.28.0.14 'cd /mortgage/temp-inbox && exec bash -l'
+}
+
+eval "$(rbenv init -)"
+export PATH="/usr/local/opt/postgresql@9.6/bin:$PATH"
+
+source ~/iterm2.zsh
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
