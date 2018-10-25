@@ -104,30 +104,6 @@ alias rkrtg="bundle exec rake routes | grep "
 alias dcu="docker-compose up"
 alias dcd="docker-compose down"
 
-cprod() {
-  ssh -t ubuntu@10.60.0.32 'cd /mortgage/production-thesaurus && exec bash -l'
-}
-
-cstage() {
-  ssh -t ubuntu@10.30.1.22 'cd /mortgage/staging-thesaurus && exec bash -l'
-}
-
-ctesting() {
-  ssh -t ubuntu@api-ipoteka-testing.project30.pro 'cd /mortgage/testing-thesaurus && exec bash -l'
-}
-
-ctesting-inb() {
-  ssh -t ubuntu@inbox-testing.project30.pro 'cd /mortgage/testing-inbox && exec bash -l'
-}
-
-ctemp() {
-  ssh -t ubuntu@10.28.0.18 'cd /mortgage/temp-thesaurus && exec bash -l'
-}
-
-ctemp-inb() {
-  ssh -t ubuntu@10.28.0.14 'cd /mortgage/temp-inbox && exec bash -l'
-}
-
 eval "$(rbenv init -)"
 export PATH="/usr/local/opt/postgresql@9.6/bin:$PATH"
 
