@@ -22,9 +22,10 @@ git clone https://github.com/khataev/dotfiles.git ~/work/dotfiles
 
 ```json
 "dotfiles.repository": "https://github.com/khataev/dotfiles.git",
-"dotfiles.targetPath": "~/dotfiles",
-"dotfiles.installCommand": "~/dotfiles/install.sh"
+"dotfiles.targetPath": "~/dotfiles"
 ```
+
+`install.sh` расширение находит и запускает само. `dotfiles.installCommand` не задавать с путём через `~` — тильда в проверке существования файла не раскрывается, и установка падает с кодом 126; если нужно явно, то `"install.sh"` без пути (команда выполняется из `targetPath`).
 
 Настройка пользовательская, а не проектная, — применяется ко всем dev-контейнерам и не навязывает окружение коллегам.
 
