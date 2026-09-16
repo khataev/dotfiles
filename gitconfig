@@ -1,0 +1,9 @@
+# Подключается через include.path из ~/.gitconfig (install.sh).
+# Машинное — credential helper, подписи — остаётся в самом ~/.gitconfig.
+[user]
+	name = Andrey Khataev
+	email = khataev@yandex.ru
+[init]
+	defaultBranch = master
+[push]
+	autoSetupRemote = true

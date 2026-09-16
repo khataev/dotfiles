@@ -6,6 +6,7 @@
 | --- | --- |
 | `.zshrc` | `~/.zshrc` |
 | `starship.toml` | `~/.config/starship.toml` |
+| `gitconfig` | `include.path` в `~/.gitconfig` (сам файл остаётся локальным) |
 
 ## Установка
 
@@ -34,5 +35,5 @@ git clone https://github.com/khataev/dotfiles.git ~/work/dotfiles
 ## Что сюда не кладём
 
 - **Секреты и машинно-специфичные пути** (токены, `credential.helper`, обёртки над `gh`) — в `~/.zshrc.local`, он подключается последней строкой `.zshrc` и в репозиторий не попадает.
-- **`.gitconfig`** — Dev Containers сам пробрасывает в контейнер git-конфиг, ssh-agent и credential helper хоста.
+- **Машинное из `~/.gitconfig`** (`credential.helper` с локальными путями, ключи подписи) — файл не линкуется, репозиторный `gitconfig` подключается в него через `include.path`. ssh-agent и credential helper в контейнер пробрасывает сам Dev Containers.
 - **`.zsh_history`** — история привязана к путям конкретной машины.

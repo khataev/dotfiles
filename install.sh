@@ -27,6 +27,15 @@ link() {
 link .zshrc .zshrc
 link starship.toml .config/starship.toml
 
+# ~/.gitconfig не линкуем: Dev Containers пишет в него напрямую при копировании
+# конфига с клиента, и через симлинк это затёрло бы файл репозитория.
+# Вместо этого подключаем репозиторный gitconfig через include — ~/.gitconfig
+# остаётся локальным файлом для машинного (credential helper и т.п.).
+if ! git config --global --get-all include.path 2>/dev/null | grep -qx "$DOTFILES/gitconfig"; then
+  git config --global --add include.path "$DOTFILES/gitconfig"
+  echo "git:    include.path = $DOTFILES/gitconfig"
+fi
+
 # В контейнере zsh обычно не является шеллом по умолчанию для remoteUser
 if [ -n "${REMOTE_CONTAINERS:-}${CODESPACES:-}" ] && command -v zsh >/dev/null; then
   current="$(getent passwd "$(id -un)" | cut -d: -f7)"
